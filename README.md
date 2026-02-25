@@ -9,7 +9,7 @@
 
 ## Technologies
 - Backend: FastAPI (Python)
-- Frontend: React
+- Frontend: Reactjs
 - Base: Cassandra
 - Storage: MinIO
 - Auth: Keycloak
@@ -19,5 +19,3 @@
 ```bash
 git clone ...
 cd projet-ent
-cp .env.example .env
-docker-compose up -d
