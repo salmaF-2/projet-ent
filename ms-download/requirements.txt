@@ -1,0 +1,7 @@
+fastapi==0.124.4
+uvicorn==0.33.0
+minio==7.2.10
+cassandra-driver==3.29.3
+python-jose==3.4.0
+websockets==13.1
+pydantic==2.10.6
