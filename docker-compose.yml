@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: est-ent-frontend
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    networks:
+      - est-network
+
+  # Décommentez pour ajouter les services backend en production
+  # keycloak:
+  #   image: quay.io/keycloak/keycloak:latest
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     KEYCLOAK_ADMIN: admin
+  #     KEYCLOAK_ADMIN_PASSWORD: admin
+  #   networks:
+  #     - est-network
+
+networks:
+  est-network:
+    driver: bridge
