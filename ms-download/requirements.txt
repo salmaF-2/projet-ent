@@ -1,0 +1,6 @@
+fastapi==0.115.0
+uvicorn==0.32.0
+minio==7.2.10
+cassandra-driver==3.29.2
+httpx==0.27.2
+pydantic==2.9.2

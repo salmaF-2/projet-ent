@@ -1,0 +1,73 @@
+:root {
+  /* Couleurs principales */
+  --est-blue-dark: #0f2d57;
+  --est-blue: #1a4b8c;
+  --est-blue-light: #2e7bd4;
+  --est-blue-pale: #e3f2fd;
+  --est-green: #2d8c4e;
+  --est-green-light: #3da85c;
+  --est-gold: #c8a830;
+  /* Couleurs fonctionnelles */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --border: #e2e8f0;
+  --border-light: #edf2f7;
+  /* Sidebar */
+  --bg-sidebar: linear-gradient(180deg, #0a1a33 0%, #0f2d57 100%);
+  /* Ombres */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.18);
+  /* Rayons */
+  --radius: 12px;
+  --radius-lg: 20px;
+  /* Police */
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.1); }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--est-blue-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--est-blue); }
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--est-blue), var(--est-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-hover { transition: all 0.2s ease; }
+.card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
