@@ -136,7 +136,7 @@ export default function Sidebar({ user, activePage, onNav, onLogout }) {
       <div style={s.brand}>
         <div style={s.brandLogo}>
           <img
-            src="/EST-Sale-–-Ecole-Superieure-de-Technologie-de-Sale.png"
+            src="logo.png"
             alt="EST"
             style={s.brandLogoImg}
           />

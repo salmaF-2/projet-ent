@@ -281,7 +281,7 @@ export default function LoginPage() {
         <div style={st.leftContent}>
           <div style={st.logoRing}>
             <img
-              src="/EST-Sale-–-Ecole-Superieure-de-Technologie-de-Sale.png"
+              src="logo.png"
               alt="Logo EST Salé"
               style={st.logoImg}
             />
@@ -295,11 +295,7 @@ export default function LoginPage() {
             Espace Numérique de Travail<br />
             Plateforme pédagogique augmentée par l'IA
           </div>
-          <div style={st.pillRow}>
-            <span style={st.pill}>🦙 Llama 3</span>
-            <span style={st.pill}>🔒 Cloud Privé</span>
-            <span style={st.pill}>⚡ Ollama</span>
-          </div>
+          
         </div>
       </div>
 
@@ -410,25 +406,7 @@ export default function LoginPage() {
               <span style={st.newUserLink}>Contacter l'administration</span>
             </div>
 
-            {/* Info rôles */}
-            <div style={{ marginTop: '2rem', padding: '1rem 1.2rem', background: '#f8fafd', borderRadius: 12, border: '1px solid #e8edf6' }}>
-              <div style={{ fontSize: '0.76rem', fontWeight: 700, color: '#7a8bb0', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>
-                Espaces disponibles
-              </div>
-              {[
-                { icon: '🎓', label: 'Étudiant',    desc: 'Cours, téléchargements, chatbot IA' },
-                { icon: '👨‍🏫', label: 'Enseignant', desc: 'Upload cours, gestion pédagogique' },
-                { icon: '🛡️', label: 'Admin',        desc: 'Gestion utilisateurs & statistiques' },
-              ].map(r => (
-                <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: 7 }}>
-                  <span style={{ fontSize: 18 }}>{r.icon}</span>
-                  <div>
-                    <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#1e2a3a' }}>{r.label}</div>
-                    <div style={{ fontSize: '0.73rem', color: '#9aaac8' }}>{r.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            
           </div>
         ) : (
           /* ── Chatbot aide ── */
@@ -438,11 +416,7 @@ export default function LoginPage() {
               <div style={{ flex: 1 }}>
                 <div style={st.aideTitle}>Assistant IA – ENT EST Salé</div>
                 <div style={st.aideSub}>Posez vos questions sur la plateforme</div>
-                <div style={st.badgeRow}>
-                  <span style={st.badge}>🦙 Llama 3</span>
-                  <span style={st.badge}>🔒 Cloud Privé</span>
-                  <span style={st.badge}>⚡ Ollama</span>
-                </div>
+               
               </div>
               <div style={st.statusDot} />
             </div>

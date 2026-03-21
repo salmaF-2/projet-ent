@@ -363,6 +363,21 @@ async def get_user_by_username_public(username: str):
         "role":     user.role,
         "email":    user.email,
     }
+@app.get("/internal/users")
+async def get_users_internal():
+    """
+    Route interne — appelée par ms-messages pour lister les utilisateurs.
+    Pas de vérification de rôle (accès réseau Docker interne uniquement).
+    """
+    users = cassandra_db.get_all_users()
+    return [
+        {
+            "username":  u.username,
+            "full_name": u.full_name,
+            "role":      u.role,
+        }
+        for u in users
+    ]
 
 if __name__ == "__main__":
     import uvicorn

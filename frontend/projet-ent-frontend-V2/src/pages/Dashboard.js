@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import Sidebar   from '../components/Sidebar';
-import Topbar    from '../components/Topbar';
-import HomePage  from './HomePage';
+import Sidebar     from '../components/Sidebar';
+import Topbar      from '../components/Topbar';
+import HomePage    from './HomePage';
 import CoursesPage from './CoursesPage';
-import AIPage    from './AIPage';
-import UsersPage from './UsersPage';
-import UploadPage from './UploadPage';
+import AIPage      from './AIPage';
+import UsersPage   from './UsersPage';
+import UploadPage  from './UploadPage';
+import MessagesPage from './MessagesPage';
 import { Construction } from 'lucide-react';
 
 const PAGE_TITLES = {
@@ -32,11 +33,7 @@ const s = {
     textAlign: 'center', border: '1px solid #e8edf6',
     boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
   },
-  phIcon: {
-    width: 72, height: 72, borderRadius: 20, background: '#e3f2fd',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    margin: '0 auto 1.5rem', color: '#1a4b8c',
-  },
+  phIcon:  { width: 72, height: 72, borderRadius: 20, background: '#e3f2fd', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#1a4b8c' },
   phTitle: { fontSize: '1.3rem', fontWeight: 700, color: '#0f2d57', marginBottom: 8 },
   phSub:   { color: '#7a8bb0', fontSize: '0.92rem', lineHeight: 1.7 },
 };
@@ -59,12 +56,13 @@ export default function Dashboard({ user, onLogout }) {
 
   const renderPage = () => {
     switch (page) {
-      case 'home':    return <HomePage   user={user} onNav={setPage} />;
-      case 'courses': return <CoursesPage user={user} />;
-      case 'ai':      return <AIPage      user={user} />;
-      case 'users':   return <UsersPage />;
-      case 'upload':  return <UploadPage />;
-      default:        return <PlaceholderPage title={PAGE_TITLES[page] || page} />;
+      case 'home':     return <HomePage    user={user} onNav={setPage} />;
+      case 'courses':  return <CoursesPage user={user} />;
+      case 'ai':       return <AIPage      user={user} />;
+      case 'users':    return <UsersPage />;
+      case 'upload':   return <UploadPage />;
+      case 'messages': return <MessagesPage />;
+      default:         return <PlaceholderPage title={PAGE_TITLES[page] || page} />;
     }
   };
 
@@ -78,4 +76,3 @@ export default function Dashboard({ user, onLogout }) {
     </div>
   );
 }
-

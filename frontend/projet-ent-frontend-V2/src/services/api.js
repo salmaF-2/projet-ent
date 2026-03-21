@@ -1,16 +1,19 @@
 import axios from 'axios';
 
+const SERVER_IP = process.env.REACT_APP_SERVER_IP || window.location.hostname;
+
 export const API_URLS = {
-  auth:     'http://192.168.11.123:8001',
-  upload:   'http://192.168.11.123:8002',
-  download: 'http://192.168.11.123:8003',
-  admin:    'http://192.168.11.123:8004',
-  chat:     'http://192.168.11.123:8005'
+  auth:     `http://${SERVER_IP}:8001`,
+  upload:   `http://${SERVER_IP}:8002`,
+  download: `http://${SERVER_IP}:8003`,
+  admin:    `http://${SERVER_IP}:8004`,
+  chat:     `http://${SERVER_IP}:8005`,
+  messages: `http://${SERVER_IP}:8006`,
 };
 
 const apiClient = axios.create({
-  timeout: 10000,
-  headers: { 'Content-Type': 'application/json' }
+  timeout: 15000,
+  headers: { 'Content-Type': 'application/json' },
 });
 
 apiClient.interceptors.request.use(
@@ -32,10 +35,11 @@ apiClient.interceptors.response.use(
         const refreshToken = localStorage.getItem('refresh_token');
         if (refreshToken) {
           const response = await axios.post(`${API_URLS.auth}/refresh`, {
-            refresh_token: refreshToken
+            refresh_token: refreshToken,
           });
-          localStorage.setItem('token', response.data.access_token);
-          originalRequest.headers.Authorization = `Bearer ${response.data.access_token}`;
+          const newToken = response.data.access_token;
+          localStorage.setItem('token', newToken);
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
           return apiClient(originalRequest);
         }
       } catch {
@@ -51,10 +55,10 @@ apiClient.interceptors.response.use(
 export const authService = {
   login: async (username, password) => {
     const formData = new URLSearchParams();
-    formData.append('username', username);
-    formData.append('password', password);
-    formData.append('grant_type', 'password');
-    formData.append('client_id', 'ent-client');
+    formData.append('username',      username);
+    formData.append('password',      password);
+    formData.append('grant_type',    'password');
+    formData.append('client_id',     'ent-client');
     formData.append('client_secret', 'votre-secret-client');
     const response = await axios.post(
       `${API_URLS.auth}/login`,
@@ -63,11 +67,10 @@ export const authService = {
     );
     return response.data;
   },
-
   verify: async () => {
     const response = await apiClient.get(`${API_URLS.auth}/verify`);
     return response.data;
-  }
+  },
 };
 
 export const chatService = {
@@ -82,13 +85,13 @@ export const chatService = {
   health: async () => {
     const response = await axios.get(`${API_URLS.chat}/chat/health`);
     return response.data;
-  }
+  },
 };
 
 export const uploadService = {
   uploadCourse: async (formData) => {
     const response = await apiClient.post(`${API_URLS.upload}/cours`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data;
   },
@@ -99,7 +102,7 @@ export const uploadService = {
   deleteCourse: async (courseId) => {
     const response = await apiClient.delete(`${API_URLS.upload}/cours/${courseId}`);
     return response.data;
-  }
+  },
 };
 
 export const downloadService = {
@@ -114,7 +117,7 @@ export const downloadService = {
   getDownloadLink: async (courseId) => {
     const response = await apiClient.get(`${API_URLS.download}/cours/${courseId}/download`);
     return response.data;
-  }
+  },
 };
 
 export const adminService = {
@@ -144,7 +147,34 @@ export const adminService = {
   getStats: async () => {
     const response = await apiClient.get(`${API_URLS.admin}/admin/stats`);
     return response.data;
-  }
+  },
+};
+
+export const messageService = {
+  getInbox: async () => {
+    const response = await apiClient.get(`${API_URLS.messages}/messages/inbox`);
+    return response.data;
+  },
+  getSent: async () => {
+    const response = await apiClient.get(`${API_URLS.messages}/messages/sent`);
+    return response.data;
+  },
+  sendMessage: async (receiver, subject, body) => {
+    const response = await apiClient.post(`${API_URLS.messages}/messages/send`, { receiver, subject, body });
+    return response.data;
+  },
+  markRead: async (id) => {
+    const response = await apiClient.put(`${API_URLS.messages}/messages/${id}/read`);
+    return response.data;
+  },
+  deleteMessage: async (id) => {
+    const response = await apiClient.delete(`${API_URLS.messages}/messages/${id}`);
+    return response.data;
+  },
+  getUsers: async () => {
+    const response = await apiClient.get(`${API_URLS.messages}/messages/users`);
+    return response.data;
+  },
 };
 
 export default apiClient;
